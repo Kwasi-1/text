@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Image, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Icons from 'react-native-vector-icons/FontAwesome5';
 
 const App = () => {
   return (
@@ -27,7 +28,7 @@ const App = () => {
             placeholder="Search"
           />
         </View>
-        <Icon name="filter" size={24} color="#fff" style={styles.filterIcon} />
+        <Icons name="sliders-h" size={24} color="#fff" style={styles.filterIcon} />
       </View>
 
       {/* Categories */}
