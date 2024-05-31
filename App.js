@@ -11,7 +11,11 @@ const App = () => {
           <Text style={styles.greeting}>Hello, Devs</Text>
           <Text style={styles.subtitle}>14 tasks today</Text>
         </View>
-        <Icon name="person-circle" size={40} color="#f59e0b" />
+        {/* <Icon name="person-circle" size={40} color="#f59e0b" /> */}
+        <Image
+            source={require('./assets/person.png')}
+            style={styles.userImage}
+          />
       </View>
 
       {/* Search Bar */}
@@ -28,7 +32,7 @@ const App = () => {
 
       {/* Categories */}
       <Text style={styles.sectionTitle}>Categories</Text>
-      <View style={styles.categories}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.categories}>
         <View style={styles.categoryCard}>
           
           <Text style={styles.categoryText}>Exercise</Text>
@@ -47,7 +51,7 @@ const App = () => {
             style={styles.categoryImage}
           />
         </View>
-      </View>
+      </ScrollView>
 
       {/* Ongoing Tasks */}
       <Text style={styles.sectionTitle}>Ongoing Task</Text>
@@ -67,14 +71,15 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    fontFamily: 'lato',
     backgroundColor: '#F7F0E8',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
+    // marginBottom: 16,
+    padding: 16,
   },
   greeting: {
     fontSize: 24,
@@ -82,7 +87,11 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    color: 'gray',
+    // color: 'gray',
+  },
+  userImage:{
+    backgroundColor: '#fff',
+    borderRadius: '50%'
   },
   searchContainer: {
     flexDirection: 'row',
@@ -91,6 +100,10 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 8,
     marginBottom: 16,
+    // padding: 16,
+  },
+  searchIcon:{
+    padding: 5
   },
   searchBox: {
     flexDirection: 'row',
@@ -120,42 +133,62 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
+    marginLeft: 16,
   },
   categories: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 16,
+    // justifyContent: 'space-between',
+    marginBottom: 26,
+    // marginRight: 0,
+    paddingLeft: 16,
   },
   categoryCard: {
-    width: '47%',
+    // width: '47%',
     backgroundColor: '#fff',
     borderRadius: 15,
-    padding: 16,
-    alignItems: 'center',
+    padding: 6,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    width: 186,
+    height: 192,
+    marginRight:24,
+    // top: 249,
+    // left: 230,
+    // gap: 10,
+    // opacity: 0,
+
   },
   categoryImage: {
-    width: 80,
-    height: 80,
-    marginBottom: 8,
+    width: 145,
+    height: 138,
+    alignSelf:'center',
+    // paddingBottom: 20,
   },
   categoryText: {
     fontSize: 16,
     fontWeight: 'bold',
+    paddingLeft: 10
+    // textAlign: 'center'
   },
   taskCount: {
     fontSize: 14,
-    color: 'gray',
+    paddingLeft: 10
   },
   taskCard: {
     backgroundColor: '#fff',
     borderRadius: 15,
-    padding: 40,
+    paddingTop: 45,
+    paddingBottom: 45,
+    paddingLeft: 15,
     marginBottom: 8,
     borderWidth: 1,
-    borderColor: '#E8D1BA'
+    borderColor: '#E8D1BA',
+    marginLeft: 16,
+    marginRight: 16,
   },
   taskText: {
     fontSize: 16,
+    fontWeight: 'bold'
   },
 });
 
