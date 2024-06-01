@@ -1,22 +1,34 @@
 import React from 'react';
-import { View, Text, TextInput, Image, StyleSheet, ScrollView } from 'react-native';
+import {SafeAreaView, View, Text, TextInput, Image, StyleSheet, ScrollView, Button, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icons from 'react-native-vector-icons/FontAwesome5';
 
 const App = () => {
+  const tasks = [
+    { id: '1', title: 'Mobile App Development' },
+    { id: '2', title: 'Web Development' },
+    { id: '3', title: 'Push Ups' },
+  ];
+
+  const renderTask = ({ item }) => (
+    <View style={styles.taskCard}>
+      <Text style={styles.taskText}>{item.title}</Text>
+    </View>
+  );
+
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <ScrollView >
       {/* Header */}
       <View style={styles.header}>
         <View>
           <Text style={styles.greeting}>Hello, Devs</Text>
           <Text style={styles.subtitle}>14 tasks today</Text>
         </View>
-        {/* <Icon name="person-circle" size={40} color="#f59e0b" /> */}
         <Image
-            source={require('./assets/person.png')}
-            style={styles.userImage}
-          />
+          source={require('./assets/person.png')}
+          style={styles.userImage}
+        />
       </View>
 
       {/* Search Bar */}
@@ -35,7 +47,6 @@ const App = () => {
       <Text style={styles.sectionTitle}>Categories</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.categories}>
         <View style={styles.categoryCard}>
-          
           <Text style={styles.categoryText}>Exercise</Text>
           <Text style={styles.taskCount}>12 Tasks</Text>
           <Image
@@ -44,7 +55,6 @@ const App = () => {
           />
         </View>
         <View style={styles.categoryCard}>
-          
           <Text style={styles.categoryText}>Study</Text>
           <Text style={styles.taskCount}>12 Tasks</Text>
           <Image
@@ -55,32 +65,39 @@ const App = () => {
       </ScrollView>
 
       {/* Ongoing Tasks */}
-      <Text style={styles.sectionTitle}>Ongoing Task</Text>
-      <View style={styles.taskCard}>
-        <Text style={styles.taskText}>Mobile App Development</Text>
-      </View>
-      <View style={styles.taskCard}>
-        <Text style={styles.taskText}>Web Development</Text>
-      </View>
-      <View style={styles.taskCard}>
-        <Text style={styles.taskText}>Push Ups</Text>
+      <Text style={styles.sectionTitle}>Ongoing Tasks</Text>
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id}
+        renderItem={renderTask}
+      />
+
+      {/* Add Task Button */}
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Add New Task"
+          onPress={() => alert('Button Pressed')}
+          color="#ff5733"
+        />
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    fontFamily: 'lato',
     backgroundColor: '#F7F0E8',
+    paddingBottom:25,
+    paddingTop: 25,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // marginBottom: 16,
     padding: 16,
+   
   },
   greeting: {
     fontSize: 24,
@@ -88,23 +105,19 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    // color: 'gray',
   },
-  userImage:{
-    backgroundColor: '#fff',
-    borderRadius: '50%'
+  userImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#fff'
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor: '#fff',
     borderRadius: 14,
     padding: 8,
     marginBottom: 16,
-    // padding: 16,
-  },
-  searchIcon:{
-    padding: 5
   },
   searchBox: {
     flexDirection: 'row',
@@ -113,8 +126,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 14,
     padding: 8,
-    height: 49
-    // marginBottom: 16,
+    height: 49,
+  },
+  searchIcon: {
+    padding: 5,
   },
   searchInput: {
     flex: 1,
@@ -125,10 +140,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0522F',
     padding: 8,
     borderRadius: 14,
-    height: 48, 
+    height: 48,
     width: 50,
     paddingTop: 12,
-    paddingLeft: 13
+    paddingLeft: 13,
   },
   sectionTitle: {
     fontSize: 18,
@@ -138,58 +153,48 @@ const styles = StyleSheet.create({
   },
   categories: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
     marginBottom: 26,
-    // marginRight: 0,
     paddingLeft: 16,
   },
   categoryCard: {
-    // width: '47%',
     backgroundColor: '#fff',
     borderRadius: 15,
     padding: 6,
-    // alignItems: 'center',
-    // justifyContent: 'center',
     width: 186,
     height: 192,
-    marginRight:24,
-    // top: 249,
-    // left: 230,
-    // gap: 10,
-    // opacity: 0,
-
+    marginRight: 24,
   },
   categoryImage: {
     width: 145,
     height: 138,
-    alignSelf:'center',
-    // paddingBottom: 20,
+    alignSelf: 'center',
   },
   categoryText: {
     fontSize: 16,
     fontWeight: 'bold',
-    paddingLeft: 10
-    // textAlign: 'center'
+    paddingLeft: 10,
   },
   taskCount: {
     fontSize: 14,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   taskCard: {
     backgroundColor: '#fff',
     borderRadius: 15,
-    paddingTop: 45,
-    paddingBottom: 45,
-    paddingLeft: 15,
+    paddingVertical: 45,
+    paddingHorizontal: 15,
     marginBottom: 8,
     borderWidth: 1,
     borderColor: '#E8D1BA',
-    marginLeft: 16,
-    marginRight: 16,
+    marginHorizontal: 16,
   },
   taskText: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
+    marginTop: 16,
+    marginHorizontal: 16,
   },
 });
 
